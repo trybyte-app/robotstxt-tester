@@ -17,7 +17,7 @@ A web tool for validating URLs against robots.txt rules. Built with RFC 9309 com
 - **Bundler**: Vite
 - **Styling**: Tailwind CSS v4
 - **UI**: Base UI
-- **Parser**: @trybyte/robotstxt-parser
+- **Parser**: [@trybyte/robotstxt-parser](https://github.com/trybyte-app/robotstxt-ts-port)
 
 ## Getting Started
 
