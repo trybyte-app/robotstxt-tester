@@ -1,0 +1,14 @@
+{
+  "useTabs": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
+  "importOrder": [
+    "^(react|next?/?([a-zA-Z/]*))$",
+    "^@convex/(.*)$",
+    "<THIRD_PARTY_MODULES>",
+    "@/(.*)$",
+    "^@components/(.*)$",
+    "^[./].*$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}
