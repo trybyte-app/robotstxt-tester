@@ -4,8 +4,8 @@ import * as React from "react";
 
 import { mergeProps } from "@base-ui-components/react/merge-props";
 import { useRender } from "@base-ui-components/react/use-render";
+import { SidebarSimpleIcon } from "@phosphor-icons/react";
 import { type VariantProps, cva } from "class-variance-authority";
-import { PanelLeftIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -273,7 +273,7 @@ function SidebarTrigger({
 			variant="ghost"
 			{...props}
 		>
-			<PanelLeftIcon />
+			<SidebarSimpleIcon />
 			<span className="sr-only">Toggle Sidebar</span>
 		</Button>
 	);
@@ -614,10 +614,15 @@ function SidebarMenuSkeleton({
 }: React.ComponentProps<"div"> & {
 	showIcon?: boolean;
 }) {
-	// Random width between 50 to 90%.
+	// Deterministic width between 50 to 90% based on stable ID.
+	const id = React.useId();
 	const width = React.useMemo(() => {
-		return `${Math.floor(Math.random() * 40) + 50}%`;
-	}, []);
+		let hash = 0;
+		for (let i = 0; i < id.length; i++) {
+			hash = (hash * 31 + id.charCodeAt(i)) | 0;
+		}
+		return `${Math.abs(hash % 41) + 50}%`;
+	}, [id]);
 
 	return (
 		<div

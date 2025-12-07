@@ -13,11 +13,11 @@
 	},
 	"dependencies": {
 		"@base-ui-components/react": "^1.0.0-beta.7",
+		"@phosphor-icons/react": "^2.1.10",
 		"@tailwindcss/vite": "^4.1.17",
-		"@trybyte/robotstxt-parser": "^1.0.0",
+		"@trybyte/robotstxt-parser": "^1.1.0",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
-		"lucide-react": "^0.555.0",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
 		"tailwind-merge": "^3.4.0",

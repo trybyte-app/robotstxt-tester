@@ -1,9 +1,9 @@
 import {
-	AlertTriangleIcon,
-	CheckCircle2Icon,
+	CheckCircleIcon,
 	HashIcon,
+	WarningIcon,
 	XCircleIcon,
-} from "lucide-react";
+} from "@phosphor-icons/react";
 
 import type { ResultsSummary as ResultsSummaryType } from "@/types/robots";
 
@@ -33,7 +33,7 @@ export function ResultsSummary({ summary }: ResultsSummaryProps) {
 			{/* Allowed */}
 			<div className="glow-success flex flex-col gap-2 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4">
 				<div className="flex items-center gap-2 text-emerald-400">
-					<CheckCircle2Icon className="size-4" />
+					<CheckCircleIcon className="size-4" />
 					<span className="text-xs font-medium tracking-wider uppercase">
 						Allowed
 					</span>
@@ -70,7 +70,7 @@ export function ResultsSummary({ summary }: ResultsSummaryProps) {
 			{/* Invalid */}
 			<div className="flex flex-col gap-2 rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
 				<div className="flex items-center gap-2 text-amber-400">
-					<AlertTriangleIcon className="size-4" />
+					<WarningIcon className="size-4" />
 					<span className="text-xs font-medium tracking-wider uppercase">
 						Invalid
 					</span>

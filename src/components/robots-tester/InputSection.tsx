@@ -1,10 +1,12 @@
 import {
 	FileTextIcon,
-	LinkIcon,
+	LinkSimpleIcon,
 	PlayIcon,
-	Sparkles,
+	SlidersIcon,
+	SpinnerGapIcon,
 	TrashIcon,
-} from "lucide-react";
+	WarningCircleIcon,
+} from "@phosphor-icons/react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +27,7 @@ interface InputSectionProps {
 	selectedUserAgent: string;
 	customUserAgent: string;
 	isLoading: boolean;
+	inputError: string | null;
 	onRobotsTxtChange: (value: string) => void;
 	onUrlListChange: (value: string) => void;
 	onUserAgentChange: (value: string) => void;
@@ -39,6 +42,7 @@ export function InputSection({
 	selectedUserAgent,
 	customUserAgent,
 	isLoading,
+	inputError,
 	onRobotsTxtChange,
 	onUrlListChange,
 	onUserAgentChange,
@@ -59,7 +63,7 @@ export function InputSection({
 			<CardHeader className="border-b border-white/5">
 				<div className="flex items-center gap-3">
 					<div className="flex size-10 items-center justify-center rounded-lg bg-white/5">
-						<FileTextIcon className="size-5 text-zinc-400" />
+						<SlidersIcon className="size-5 text-zinc-400" />
 					</div>
 					<div>
 						<CardTitle className="text-lg text-white">Configuration</CardTitle>
@@ -96,7 +100,7 @@ export function InputSection({
 					<Field className="fixed-textarea">
 						<FieldLabel className="flex items-center justify-between text-zinc-300">
 							<span className="flex items-center gap-2">
-								<LinkIcon className="size-4 text-cyan-400" />
+								<LinkSimpleIcon className="size-4 text-cyan-400" />
 								URLs to Test
 							</span>
 							{urlCount > 0 && (
@@ -124,6 +128,17 @@ export function InputSection({
 					/>
 				</div>
 
+				{/* Error Display */}
+				{inputError && (
+					<div className="flex items-start gap-3 rounded-lg border border-red-500/30 bg-red-500/10 p-4">
+						<WarningCircleIcon className="mt-0.5 size-5 flex-shrink-0 text-red-400" />
+						<div className="flex flex-col gap-1">
+							<span className="font-medium text-red-400">Validation Error</span>
+							<span className="text-sm text-red-300/80">{inputError}</span>
+						</div>
+					</div>
+				)}
+
 				{/* Action Buttons */}
 				<div className="flex flex-wrap items-center gap-3 border-t border-white/5 pt-6">
 					<Button
@@ -133,7 +148,7 @@ export function InputSection({
 					>
 						{isLoading ? (
 							<>
-								<Sparkles className="size-4 animate-spin" />
+								<SpinnerGapIcon className="size-4 animate-spin" />
 								Processing...
 							</>
 						) : (

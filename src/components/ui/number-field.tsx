@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import { NumberField as NumberFieldPrimitive } from "@base-ui-components/react/number-field";
-import { MinusIcon, PlusIcon } from "lucide-react";
+import { MinusIcon, PlusIcon } from "@phosphor-icons/react";
 
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -153,9 +153,9 @@ function CursorGrowIcon(props: React.ComponentProps<"svg">) {
 
 export {
 	NumberField,
-	NumberFieldScrubArea,
 	NumberFieldDecrement,
-	NumberFieldIncrement,
 	NumberFieldGroup,
+	NumberFieldIncrement,
 	NumberFieldInput,
+	NumberFieldScrubArea,
 };

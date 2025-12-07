@@ -6,10 +6,36 @@ export interface UrlCheckResult {
 	matchedRuleType: "allow" | "disallow" | "none" | null;
 }
 
-export interface ProcessedUrlResult extends UrlCheckResult {
-	isValidUrl: boolean;
-	validationError?: string;
+/**
+ * Result for a valid URL that was successfully checked against robots.txt
+ */
+interface ValidUrlResult {
+	isValidUrl: true;
+	url: string;
+	allowed: boolean;
+	matchingLine: number | null;
+	matchedPattern: string | null;
+	matchedRuleType: "allow" | "disallow" | "none";
 }
+
+/**
+ * Result for an invalid URL that failed validation
+ */
+interface InvalidUrlResult {
+	isValidUrl: false;
+	url: string;
+	allowed: false;
+	matchingLine: null;
+	matchedPattern: null;
+	matchedRuleType: null;
+	validationError: string;
+}
+
+/**
+ * Discriminated union type for processed URL results.
+ * Use `result.isValidUrl` to narrow the type.
+ */
+export type ProcessedUrlResult = ValidUrlResult | InvalidUrlResult;
 
 export interface UrlTreeNode {
 	name: string;

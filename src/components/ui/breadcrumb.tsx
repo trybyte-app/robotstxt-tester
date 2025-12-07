@@ -2,7 +2,7 @@ import type * as React from "react";
 
 import { mergeProps } from "@base-ui-components/react/merge-props";
 import { useRender } from "@base-ui-components/react/use-render";
-import { ChevronRight, MoreHorizontal } from "lucide-react";
+import { CaretRightIcon, DotsThreeIcon } from "@phosphor-icons/react";
 
 import { cn } from "@/lib/utils";
 
@@ -77,7 +77,7 @@ function BreadcrumbSeparator({
 			role="presentation"
 			{...props}
 		>
-			{children ?? <ChevronRight />}
+			{children ?? <CaretRightIcon />}
 		</li>
 	);
 }
@@ -94,7 +94,7 @@ function BreadcrumbEllipsis({
 			role="presentation"
 			{...props}
 		>
-			<MoreHorizontal className="size-4" />
+			<DotsThreeIcon className="size-4" />
 			<span className="sr-only">More</span>
 		</span>
 	);
@@ -102,10 +102,10 @@ function BreadcrumbEllipsis({
 
 export {
 	Breadcrumb,
-	BreadcrumbList,
+	BreadcrumbEllipsis,
 	BreadcrumbItem,
 	BreadcrumbLink,
+	BreadcrumbList,
 	BreadcrumbPage,
 	BreadcrumbSeparator,
-	BreadcrumbEllipsis,
 };

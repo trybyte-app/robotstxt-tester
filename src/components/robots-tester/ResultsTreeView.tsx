@@ -1,11 +1,11 @@
 import { useState, useTransition } from "react";
 
 import {
-	ChevronsDownUpIcon,
-	ChevronsUpDownIcon,
-	LoaderIcon,
-	TreesIcon,
-} from "lucide-react";
+	CaretDoubleUpIcon,
+	CaretUpDownIcon,
+	SpinnerGapIcon,
+	TreeStructureIcon,
+} from "@phosphor-icons/react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -59,7 +59,7 @@ export function ResultsTreeView({ tree }: ResultsTreeViewProps) {
 			<Empty className="border-white/10 bg-black/20">
 				<EmptyHeader>
 					<EmptyMedia variant="icon">
-						<TreesIcon className="text-zinc-400" />
+						<TreeStructureIcon className="text-zinc-400" />
 					</EmptyMedia>
 					<EmptyTitle className="text-zinc-300">No Tree Data</EmptyTitle>
 					<EmptyDescription className="text-zinc-500">
@@ -81,9 +81,9 @@ export function ResultsTreeView({ tree }: ResultsTreeViewProps) {
 					className="border-white/10 text-zinc-400 hover:bg-white/5 hover:text-zinc-300 disabled:opacity-70"
 				>
 					{isExpandPending ? (
-						<LoaderIcon className="size-4 animate-spin" />
+						<SpinnerGapIcon className="size-4 animate-spin" />
 					) : (
-						<ChevronsUpDownIcon className="size-4" />
+						<CaretUpDownIcon className="size-4" />
 					)}
 					{isExpandPending ? "Expanding..." : "Expand All"}
 				</Button>
@@ -95,9 +95,9 @@ export function ResultsTreeView({ tree }: ResultsTreeViewProps) {
 					className="border-white/10 text-zinc-400 hover:bg-white/5 hover:text-zinc-300 disabled:opacity-70"
 				>
 					{isCollapsePending ? (
-						<LoaderIcon className="size-4 animate-spin" />
+						<SpinnerGapIcon className="size-4 animate-spin" />
 					) : (
-						<ChevronsDownUpIcon className="size-4" />
+						<CaretDoubleUpIcon className="size-4" />
 					)}
 					{isCollapsePending ? "Collapsing..." : "Collapse All"}
 				</Button>

@@ -1,7 +1,7 @@
 "use client";
 
 import { Dialog as SheetPrimitive } from "@base-ui-components/react/dialog";
-import { XIcon } from "lucide-react";
+import { XIcon } from "@phosphor-icons/react";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
@@ -32,6 +32,7 @@ function SheetBackdrop({ className, ...props }: SheetPrimitive.Backdrop.Props) {
 }
 
 function SheetViewport({
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	className,
 	side,
 	inset = false,
@@ -177,16 +178,16 @@ function SheetPanel({ className, ...props }: React.ComponentProps<"div">) {
 
 export {
 	Sheet,
-	SheetTrigger,
-	SheetPortal,
-	SheetClose,
 	SheetBackdrop,
-	SheetBackdrop as SheetOverlay,
-	SheetPopup,
+	SheetClose,
 	SheetPopup as SheetContent,
-	SheetHeader,
-	SheetFooter,
-	SheetTitle,
 	SheetDescription,
+	SheetFooter,
+	SheetHeader,
+	SheetBackdrop as SheetOverlay,
 	SheetPanel,
+	SheetPopup,
+	SheetPortal,
+	SheetTitle,
+	SheetTrigger,
 };
