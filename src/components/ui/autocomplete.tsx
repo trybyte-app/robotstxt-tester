@@ -1,7 +1,7 @@
 "use client";
 
 import { Autocomplete as AutocompletePrimitive } from "@base-ui-components/react/autocomplete";
-import { ChevronsUpDownIcon, XIcon } from "lucide-react";
+import { CaretUpDownIcon, XIcon } from "@phosphor-icons/react";
 
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -42,7 +42,7 @@ function AutocompleteInput({
 						sizeValue === "sm" ? "end-0" : "end-0.5",
 					)}
 				>
-					<ChevronsUpDownIcon />
+					<CaretUpDownIcon />
 				</AutocompleteTrigger>
 			)}
 			{showClear && (
@@ -267,18 +267,18 @@ function AutocompleteTrigger({
 
 export {
 	Autocomplete,
-	AutocompleteInput,
-	AutocompleteTrigger,
-	AutocompletePopup,
-	AutocompleteItem,
-	AutocompleteSeparator,
+	AutocompleteClear,
+	AutocompleteCollection,
+	AutocompleteEmpty,
 	AutocompleteGroup,
 	AutocompleteGroupLabel,
-	AutocompleteEmpty,
-	AutocompleteValue,
+	AutocompleteInput,
+	AutocompleteItem,
 	AutocompleteList,
-	AutocompleteClear,
-	AutocompleteStatus,
+	AutocompletePopup,
 	AutocompleteRow,
-	AutocompleteCollection,
+	AutocompleteSeparator,
+	AutocompleteStatus,
+	AutocompleteTrigger,
+	AutocompleteValue,
 };

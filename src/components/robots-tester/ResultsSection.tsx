@@ -1,4 +1,9 @@
-import { BarChart3Icon, DownloadIcon, ListIcon, TreesIcon } from "lucide-react";
+import {
+	ChartBarIcon,
+	DownloadSimpleIcon,
+	ListBulletsIcon,
+	TreeStructureIcon,
+} from "@phosphor-icons/react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -46,7 +51,7 @@ export function ResultsSection({
 			<CardHeader className="flex flex-row items-center justify-between border-b border-white/5">
 				<div className="flex items-center gap-3">
 					<div className="flex size-10 items-center justify-center rounded-lg bg-white/5">
-						<BarChart3Icon className="size-5 text-zinc-400" />
+						<ChartBarIcon className="size-5 text-zinc-400" />
 					</div>
 					<div>
 						<CardTitle className="text-lg text-white">Results</CardTitle>
@@ -61,7 +66,7 @@ export function ResultsSection({
 					onClick={handleExport}
 					className="border-white/10 text-zinc-300 hover:border-cyan-500/30 hover:bg-cyan-500/10 hover:text-cyan-400"
 				>
-					<DownloadIcon className="size-4" />
+					<DownloadSimpleIcon className="size-4" />
 					Export CSV
 				</Button>
 			</CardHeader>
@@ -74,11 +79,11 @@ export function ResultsSection({
 				>
 					<TabsList className="border border-white/10 bg-zinc-800/50">
 						<TabsTab value="table" className="data-active:text-white">
-							<ListIcon className="size-4" />
+							<ListBulletsIcon className="size-4" />
 							Table View
 						</TabsTab>
 						<TabsTab value="tree" className="data-active:text-white">
-							<TreesIcon className="size-4" />
+							<TreeStructureIcon className="size-4" />
 							Tree View
 						</TabsTab>
 					</TabsList>

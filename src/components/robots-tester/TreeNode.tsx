@@ -1,12 +1,12 @@
 import {
+	CaretDownIcon,
+	CaretRightIcon,
 	CheckCircleIcon,
-	ChevronDownIcon,
-	ChevronRightIcon,
 	FileIcon,
-	FolderIcon,
-	GlobeIcon,
+	FolderSimpleIcon,
+	GlobeSimpleIcon,
 	XCircleIcon,
-} from "lucide-react";
+} from "@phosphor-icons/react";
 
 import {
 	Collapsible,
@@ -42,9 +42,9 @@ export function TreeNode({
 				{hasChildren ? (
 					<CollapsibleTrigger className="flex items-center rounded p-0.5 hover:bg-white/10">
 						{isExpanded ? (
-							<ChevronDownIcon className="size-4 text-zinc-500" />
+							<CaretDownIcon className="size-4 text-zinc-500" />
 						) : (
-							<ChevronRightIcon className="size-4 text-zinc-500" />
+							<CaretRightIcon className="size-4 text-zinc-500" />
 						)}
 					</CollapsibleTrigger>
 				) : (
@@ -52,9 +52,9 @@ export function TreeNode({
 				)}
 
 				{isRoot ? (
-					<GlobeIcon className="size-4 text-cyan-400" />
+					<GlobeSimpleIcon className="size-4 text-cyan-400" />
 				) : isDirectory ? (
-					<FolderIcon className="size-4 text-amber-400/70" />
+					<FolderSimpleIcon className="size-4 text-amber-400/70" />
 				) : (
 					<FileIcon className="size-4 text-zinc-500" />
 				)}

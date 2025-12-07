@@ -25,11 +25,25 @@ export function exportToCsv(results: ProcessedUrlResult[]): void {
 	downloadCsv(csvContent, "robots-test-results.csv");
 }
 
+// Characters that can trigger formula execution in spreadsheet applications
+const FORMULA_PREFIXES = ["=", "+", "-", "@", "\t", "\r"];
+
 function escapeCSVField(field: string): string {
-	if (field.includes(",") || field.includes("\n") || field.includes('"')) {
-		return `"${field.replace(/"/g, '""')}"`;
+	let escaped = field;
+
+	// Prevent CSV injection by prefixing formula characters with single quote
+	if (FORMULA_PREFIXES.some((prefix) => field.startsWith(prefix))) {
+		escaped = `'${field}`;
 	}
-	return field;
+
+	if (
+		escaped.includes(",") ||
+		escaped.includes("\n") ||
+		escaped.includes('"')
+	) {
+		return `"${escaped.replace(/"/g, '""')}"`;
+	}
+	return escaped;
 }
 
 function downloadCsv(content: string, filename: string): void {

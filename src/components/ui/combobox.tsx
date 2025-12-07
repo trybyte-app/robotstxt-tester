@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import { Combobox as ComboboxPrimitive } from "@base-ui-components/react/combobox";
-import { ChevronsUpDownIcon, XIcon } from "lucide-react";
+import { CaretUpDownIcon, XIcon } from "@phosphor-icons/react";
 
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -86,7 +86,7 @@ function ComboboxInput({
 						sizeValue === "sm" ? "end-0" : "end-0.5",
 					)}
 				>
-					<ChevronsUpDownIcon />
+					<CaretUpDownIcon />
 				</ComboboxTrigger>
 			)}
 			{showClear && (
@@ -344,20 +344,20 @@ function ComboboxChipRemove(props: ComboboxPrimitive.ChipRemove.Props) {
 
 export {
 	Combobox,
-	ComboboxInput,
-	ComboboxTrigger,
-	ComboboxPopup,
-	ComboboxItem,
-	ComboboxSeparator,
+	ComboboxChip,
+	ComboboxChips,
+	ComboboxClear,
+	ComboboxCollection,
+	ComboboxEmpty,
 	ComboboxGroup,
 	ComboboxGroupLabel,
-	ComboboxEmpty,
-	ComboboxValue,
+	ComboboxInput,
+	ComboboxItem,
 	ComboboxList,
-	ComboboxClear,
-	ComboboxStatus,
+	ComboboxPopup,
 	ComboboxRow,
-	ComboboxCollection,
-	ComboboxChips,
-	ComboboxChip,
+	ComboboxSeparator,
+	ComboboxStatus,
+	ComboboxTrigger,
+	ComboboxValue,
 };

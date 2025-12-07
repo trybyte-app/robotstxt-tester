@@ -7,15 +7,100 @@ import {
 	ITEMS_PER_PAGE,
 	STORAGE_KEYS,
 } from "@/constants/user-agents";
+import {
+	CHUNK_SIZE,
+	MAX_ROBOTS_TXT_SIZE,
+	MAX_URL_COUNT,
+	USER_AGENT_REGEX,
+} from "@/constants/validation-limits";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { clearAllStorage } from "@/lib/storage";
 import { buildUrlTree, sortTree } from "@/lib/tree-builder";
-import { validateUrls } from "@/lib/url-validation";
+import { type UrlValidationResult, validateUrls } from "@/lib/url-validation";
 import type {
 	ProcessedUrlResult,
 	ResultsSummary,
 	UrlTreeNode,
 } from "@/types/robots";
+
+/**
+ * Validates input before processing per RFC 9309 and library docs
+ */
+function validateInput(
+	robotsTxt: string,
+	urlList: string,
+	userAgent: string,
+): string | null {
+	if (robotsTxt.length > MAX_ROBOTS_TXT_SIZE) {
+		return `robots.txt exceeds maximum size of ${Math.round(MAX_ROBOTS_TXT_SIZE / 1024)} KiB`;
+	}
+
+	const urlCount = urlList.split("\n").filter((l) => l.trim()).length;
+	if (urlCount > MAX_URL_COUNT) {
+		return `Too many URLs (${urlCount}). Maximum is ${MAX_URL_COUNT}`;
+	}
+
+	// Validate user-agent format (allow * for all agents)
+	if (userAgent !== "*" && !USER_AGENT_REGEX.test(userAgent)) {
+		return "Invalid user-agent format. Only letters, underscores, and hyphens allowed";
+	}
+
+	return null;
+}
+
+/**
+ * Processes URLs in chunks to avoid blocking the main thread
+ */
+async function processUrlsInChunks(
+	validationResults: UrlValidationResult[],
+	parsed: ParsedRobots,
+	effectiveUserAgent: string,
+): Promise<ProcessedUrlResult[]> {
+	const results: ProcessedUrlResult[] = [];
+	const validUrls = validationResults.filter((r) => r.isValid);
+
+	// Process valid URLs in chunks
+	for (let i = 0; i < validUrls.length; i += CHUNK_SIZE) {
+		const chunk = validUrls.slice(i, i + CHUNK_SIZE);
+		const urls = chunk.map((r) => r.url);
+
+		// Check this batch against robots.txt
+		const checkResults = parsed.checkUrls(effectiveUserAgent, urls);
+		const checkMap = new Map(checkResults.map((r) => [r.url, r]));
+
+		// Map results
+		for (const validation of chunk) {
+			const checkResult = checkMap.get(validation.url);
+			results.push({
+				url: validation.url,
+				allowed: checkResult?.allowed ?? true,
+				matchingLine: checkResult?.matchingLine ?? null,
+				matchedPattern: checkResult?.matchedPattern ?? null,
+				// Default to "none" when no rule matched
+				matchedRuleType: checkResult?.matchedRuleType ?? "none",
+				isValidUrl: true,
+			});
+		}
+
+		// Yield to main thread to keep UI responsive
+		await new Promise((r) => setTimeout(r, 0));
+	}
+
+	// Add invalid URLs to results
+	for (const validation of validationResults.filter((r) => !r.isValid)) {
+		results.push({
+			url: validation.url,
+			allowed: false,
+			matchingLine: null,
+			matchedPattern: null,
+			matchedRuleType: null,
+			isValidUrl: false,
+			validationError: validation.error ?? "Invalid URL",
+		});
+	}
+
+	return results;
+}
 
 export function useRobotsTester() {
 	// Persisted state
@@ -33,6 +118,7 @@ export function useRobotsTester() {
 	const [customUserAgent, setCustomUserAgent] = useState("");
 	const [results, setResults] = useState<ProcessedUrlResult[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [inputError, setInputError] = useState<string | null>(null);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [activeView, setActiveView] = useState<"table" | "tree">("table");
 
@@ -77,62 +163,48 @@ export function useRobotsTester() {
 	}, [results]);
 
 	// Actions
-	const testUrls = useCallback(() => {
+	const testUrls = useCallback(async () => {
 		if (!robotsTxt.trim() || !urlList.trim() || !effectiveUserAgent.trim()) {
+			return;
+		}
+
+		// Clear previous error
+		setInputError(null);
+
+		// Validate input before processing (per RFC 9309 and library docs)
+		const validationError = validateInput(
+			robotsTxt,
+			urlList,
+			effectiveUserAgent,
+		);
+		if (validationError) {
+			setInputError(validationError);
 			return;
 		}
 
 		setIsLoading(true);
 		setCurrentPage(1);
 
-		// Use setTimeout to allow UI to update before heavy computation
-		setTimeout(() => {
-			try {
-				const validationResults = validateUrls(urlList);
-				const validUrls = validationResults
-					.filter((r) => r.isValid)
-					.map((r) => r.url);
+		try {
+			const validationResults = validateUrls(urlList);
+			const parsed = ParsedRobots.parse(robotsTxt);
 
-				const parsed = ParsedRobots.parse(robotsTxt);
-				const checkResults = parsed.checkUrls(effectiveUserAgent, validUrls);
+			// Process URLs in chunks to keep UI responsive
+			const processedResults = await processUrlsInChunks(
+				validationResults,
+				parsed,
+				effectiveUserAgent,
+			);
 
-				// Create a map for quick lookup
-				const checkResultsMap = new Map(checkResults.map((r) => [r.url, r]));
-
-				// Map check results back to validation results
-				const processedResults: ProcessedUrlResult[] = validationResults.map(
-					(validation) => {
-						if (!validation.isValid) {
-							return {
-								url: validation.url,
-								allowed: false,
-								matchingLine: null,
-								matchedPattern: null,
-								matchedRuleType: null,
-								isValidUrl: false,
-								validationError: validation.error,
-							};
-						}
-
-						const checkResult = checkResultsMap.get(validation.url);
-						return {
-							url: validation.url,
-							allowed: checkResult?.allowed ?? true,
-							matchingLine: checkResult?.matchingLine ?? null,
-							matchedPattern: checkResult?.matchedPattern ?? null,
-							matchedRuleType: checkResult?.matchedRuleType ?? null,
-							isValidUrl: true,
-						};
-					},
-				);
-
-				setResults(processedResults);
-			} catch (error) {
-				console.error("Error testing URLs:", error);
-			} finally {
-				setIsLoading(false);
-			}
-		}, 10);
+			setResults(processedResults);
+		} catch (error) {
+			console.error("Error testing URLs:", error);
+			setInputError(
+				error instanceof Error ? error.message : "An error occurred",
+			);
+		} finally {
+			setIsLoading(false);
+		}
 	}, [robotsTxt, urlList, effectiveUserAgent]);
 
 	const clearData = useCallback(() => {
@@ -142,6 +214,7 @@ export function useRobotsTester() {
 		setSelectedUserAgent("Googlebot");
 		setCustomUserAgent("");
 		setResults([]);
+		setInputError(null);
 		setCurrentPage(1);
 	}, [setRobotsTxt, setUrlList, setSelectedUserAgent]);
 
@@ -153,6 +226,7 @@ export function useRobotsTester() {
 		customUserAgent,
 		results,
 		isLoading,
+		inputError,
 		currentPage,
 		activeView,
 

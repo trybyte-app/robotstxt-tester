@@ -1,10 +1,24 @@
 import { STORAGE_KEYS } from "@/constants/user-agents";
 
-export function saveToStorage(key: string, value: string): void {
+export type StorageResult =
+	| { success: true }
+	| { success: false; error: "quota" | "unknown" };
+
+export function saveToStorage(key: string, value: string): StorageResult {
 	try {
 		localStorage.setItem(key, value);
+		return { success: true };
 	} catch (error) {
+		// Detect quota exceeded error (different browsers report it differently)
+		if (
+			error instanceof DOMException &&
+			(error.name === "QuotaExceededError" || error.code === 22)
+		) {
+			console.warn("localStorage quota exceeded");
+			return { success: false, error: "quota" };
+		}
 		console.error("Failed to save to localStorage:", error);
+		return { success: false, error: "unknown" };
 	}
 }
 

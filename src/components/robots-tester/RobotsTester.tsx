@@ -1,4 +1,4 @@
-import { BotIcon, ShieldCheckIcon } from "lucide-react";
+import { RobotIcon, ShieldCheckIcon } from "@phosphor-icons/react";
 
 import { useRobotsTester } from "@/hooks/use-robots-tester";
 
@@ -20,7 +20,7 @@ export function RobotsTester() {
 					<div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 						<div className="flex items-start gap-4">
 							<div className="flex size-14 items-center justify-center rounded-xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-sm">
-								<BotIcon className="size-7 text-emerald-400" />
+								<RobotIcon className="size-7 text-emerald-400" />
 							</div>
 							<div className="flex flex-col gap-1">
 								<h1 className="text-2xl font-extrabold tracking-tight text-white md:text-3xl lg:text-4xl">
@@ -54,6 +54,7 @@ export function RobotsTester() {
 						selectedUserAgent={state.selectedUserAgent}
 						customUserAgent={state.customUserAgent}
 						isLoading={state.isLoading}
+						inputError={state.inputError}
 						onRobotsTxtChange={state.setRobotsTxt}
 						onUrlListChange={state.setUrlList}
 						onUserAgentChange={state.setSelectedUserAgent}
@@ -90,7 +91,17 @@ export function RobotsTester() {
 							<img src="byte-light.png" alt="Byte" className="h-6" />
 						</div>
 						<div className="mt-2 flex items-center gap-4 text-xs text-zinc-400">
-							<span>Powered by <a href="https://github.com/trybyte-app/robotstxt-ts-port" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-300 transition-colors underline">robotstxt-parser</a></span>
+							<span>
+								Powered by{" "}
+								<a
+									href="https://github.com/trybyte-app/robotstxt-ts-port"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-zinc-400 underline transition-colors hover:text-zinc-300"
+								>
+									robotstxt-parser
+								</a>
+							</span>
 							<span className="size-1 rounded-full bg-zinc-700" />
 							<span>RFC 9309 Compliant</span>
 						</div>

@@ -1,4 +1,8 @@
-import { AlertTriangleIcon, CheckCircleIcon, XCircleIcon } from "lucide-react";
+import {
+	CheckCircleIcon,
+	WarningIcon,
+	XCircleIcon,
+} from "@phosphor-icons/react";
 
 import {
 	Empty,
@@ -53,7 +57,7 @@ export function ResultsTableView({
 			<Empty className="border-white/10 bg-black/20">
 				<EmptyHeader>
 					<EmptyMedia variant="icon">
-						<AlertTriangleIcon className="text-zinc-400" />
+						<WarningIcon className="text-zinc-400" />
 					</EmptyMedia>
 					<EmptyTitle className="text-zinc-300">No Results</EmptyTitle>
 					<EmptyDescription className="text-zinc-500">
@@ -107,7 +111,7 @@ export function ResultsTableView({
 									<TableCell>
 										{!result.isValidUrl ? (
 											<span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-1 text-xs font-medium text-amber-400">
-												<AlertTriangleIcon className="size-3" />
+												<WarningIcon className="size-3" />
 												Invalid
 											</span>
 										) : result.allowed ? (
