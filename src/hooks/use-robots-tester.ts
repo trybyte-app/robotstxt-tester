@@ -83,7 +83,7 @@ async function processUrlsInChunks(
 		}
 
 		// Yield to main thread to keep UI responsive
-		await new Promise((r) => setTimeout(r, 0));
+		await new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 0)));
 	}
 
 	// Add invalid URLs to results
