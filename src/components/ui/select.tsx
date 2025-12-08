@@ -53,7 +53,7 @@ function SelectPopup({
 	className,
 	children,
 	sideOffset = 4,
-	alignItemWithTrigger = true,
+	alignItemWithTrigger = false,
 	...props
 }: SelectPrimitive.Popup.Props & {
 	sideOffset?: SelectPrimitive.Positioner.Props["sideOffset"];
@@ -63,7 +63,7 @@ function SelectPopup({
 		<SelectPrimitive.Portal>
 			<SelectPrimitive.Positioner
 				alignItemWithTrigger={alignItemWithTrigger}
-				className="z-50 select-none"
+				className="z-[9999] select-none"
 				data-slot="select-positioner"
 				sideOffset={sideOffset}
 			>
@@ -78,7 +78,7 @@ function SelectPopup({
 					>
 						<CaretUpIcon className="relative size-4" />
 					</SelectPrimitive.ScrollUpArrow>
-					<span className="bg-popover relative block h-full rounded-lg border bg-clip-padding before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-lg dark:not-in-data-[slot=group]:bg-clip-border">
+					<span className="bg-zinc-900 relative block h-full rounded-lg border border-white/10 bg-clip-padding before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-lg dark:not-in-data-[slot=group]:bg-clip-border">
 						<SelectPrimitive.List
 							className={cn(
 								"max-h-(--available-height) min-w-(--anchor-width) overflow-y-auto p-1",
@@ -125,7 +125,7 @@ function SelectItem({
 					strokeWidth="2"
 					viewBox="0 0 24 24"
 					width="24"
-					xmlns="http://www.w3.org/1500/svg"
+					xmlns="http://www.w3.org/2000/svg"
 				>
 					<path d="M5.252 12.7 10.2 18.63 18.748 5.37" />
 				</svg>

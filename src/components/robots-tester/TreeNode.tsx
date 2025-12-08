@@ -36,15 +36,15 @@ export function TreeNode({
 	return (
 		<Collapsible open={isExpanded} onOpenChange={() => onToggle(node.path)}>
 			<div
-				className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-white/[0.03]"
+				className="group flex items-center gap-2 rounded-md px-2 py-1.5 transition-colors hover:bg-white/[0.05]"
 				style={{ paddingLeft: `${depth * 20 + 8}px` }}
 			>
 				{hasChildren ? (
-					<CollapsibleTrigger className="flex items-center rounded p-0.5 hover:bg-white/10">
+					<CollapsibleTrigger className="flex items-center rounded p-0.5 text-zinc-600 hover:text-[var(--color-acid)] hover:bg-[var(--color-acid)]/10 transition-colors">
 						{isExpanded ? (
-							<CaretDownIcon className="size-4 text-zinc-500" />
+							<CaretDownIcon className="size-4" />
 						) : (
-							<CaretRightIcon className="size-4 text-zinc-500" />
+							<CaretRightIcon className="size-4" />
 						)}
 					</CollapsibleTrigger>
 				) : (
@@ -52,29 +52,29 @@ export function TreeNode({
 				)}
 
 				{isRoot ? (
-					<GlobeSimpleIcon className="size-4 text-cyan-400" />
+					<GlobeSimpleIcon className="size-4 text-[var(--color-acid)]" />
 				) : isDirectory ? (
-					<FolderSimpleIcon className="size-4 text-amber-400/70" />
+					<FolderSimpleIcon className="size-4 text-[var(--color-purple)]" />
 				) : (
-					<FileIcon className="size-4 text-zinc-500" />
+					<FileIcon className="size-4 text-zinc-600" />
 				)}
 
 				<span
-					className={`flex-1 truncate font-mono text-sm ${isRoot ? "font-medium text-cyan-300" : "text-zinc-300"}`}
+					className={`flex-1 truncate font-mono text-sm ${isRoot ? "font-bold text-white tracking-wide" : "text-zinc-400 group-hover:text-zinc-200"}`}
 				>
 					{node.name}
 				</span>
 
-				<div className="flex items-center gap-1.5">
+				<div className="flex items-center gap-1.5 opacity-60 group-hover:opacity-100 transition-opacity">
 					{node.stats.allowed > 0 && (
-						<span className="inline-flex items-center gap-1 rounded-md border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-xs font-medium text-emerald-400">
-							<CheckCircleIcon className="size-3" />
+						<span className="inline-flex items-center gap-1 rounded border border-[var(--color-acid)]/30 bg-[var(--color-acid)]/5 px-1.5 py-0.5 text-[10px] font-bold text-[var(--color-acid)]">
+							<CheckCircleIcon className="size-3" weight="fill" />
 							{node.stats.allowed}
 						</span>
 					)}
 					{node.stats.disallowed > 0 && (
-						<span className="inline-flex items-center gap-1 rounded-md border border-red-500/20 bg-red-500/10 px-2 py-0.5 text-xs font-medium text-red-400">
-							<XCircleIcon className="size-3" />
+						<span className="inline-flex items-center gap-1 rounded border border-red-500/30 bg-red-500/5 px-1.5 py-0.5 text-[10px] font-bold text-red-500">
+							<XCircleIcon className="size-3" weight="fill" />
 							{node.stats.disallowed}
 						</span>
 					)}
@@ -96,16 +96,16 @@ export function TreeNode({
 					{node.urls.map((url, index) => (
 						<div
 							key={`${url.url}-${index}`}
-							className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-white/[0.03]"
+							className="flex items-center gap-2 rounded-md px-2 py-1.5 transition-colors hover:bg-white/[0.03] group/item"
 							style={{ paddingLeft: `${(depth + 1) * 20 + 8}px` }}
 						>
 							<span className="w-5" />
 							{url.allowed ? (
-								<CheckCircleIcon className="size-4 text-emerald-400" />
+								<CheckCircleIcon className="size-4 text-[var(--color-acid)]" />
 							) : (
-								<XCircleIcon className="size-4 text-red-400" />
+								<XCircleIcon className="size-4 text-red-500" />
 							)}
-							<span className="flex-1 truncate font-mono text-sm text-zinc-500">
+							<span className="flex-1 truncate font-mono text-sm text-zinc-600 group-hover/item:text-zinc-400 transition-colors">
 								{getFileName(url.url)}
 							</span>
 						</div>

@@ -6,7 +6,6 @@ import {
 } from "@phosphor-icons/react";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTab } from "@/components/ui/tabs";
 import { exportToCsv } from "@/lib/csv-export";
 import type {
@@ -47,62 +46,74 @@ export function ResultsSection({
 	};
 
 	return (
-		<Card className="border-white/10 bg-zinc-900/80 backdrop-blur-sm">
-			<CardHeader className="flex flex-row items-center justify-between border-b border-white/5">
-				<div className="flex items-center gap-3">
-					<div className="flex size-10 items-center justify-center rounded-lg bg-white/5">
-						<ChartBarIcon className="size-5 text-zinc-400" />
+		<div className="glass-panel rounded-2xl p-1.5 md:p-2">
+			<div className="rounded-xl bg-black/40 border border-white/5 p-6 md:p-8">
+				<div className="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-white/5 pb-6 mb-8 gap-4">
+					<div className="flex items-center gap-4">
+						<div className="size-12 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center shadow-inner">
+							<ChartBarIcon className="size-6 text-[var(--color-purple)]" />
+						</div>
+						<div>
+							<h3 className="text-xl font-bold text-white tracking-tight">Analysis Report</h3>
+							<p className="text-zinc-500 font-mono text-xs mt-1">
+								STATUS: COMPLETE // ITEMS: {results.length}
+							</p>
+						</div>
 					</div>
-					<div>
-						<CardTitle className="text-lg text-white">Results</CardTitle>
-						<p className="text-sm text-zinc-500">
-							Analysis complete &middot; {results.length} URLs processed
-						</p>
-					</div>
+					<Button
+						variant="outline"
+						size="sm"
+						onClick={handleExport}
+						className="border-zinc-800 bg-zinc-900/50 text-zinc-300 hover:border-[var(--color-acid)] hover:text-[var(--color-acid)] hover:bg-[var(--color-acid)]/10 transition-all font-mono text-xs"
+					>
+						<DownloadSimpleIcon className="size-4" />
+						EXPORT_DATA
+					</Button>
 				</div>
-				<Button
-					variant="outline"
-					size="sm"
-					onClick={handleExport}
-					className="border-white/10 text-zinc-300 hover:border-cyan-500/30 hover:bg-cyan-500/10 hover:text-cyan-400"
-				>
-					<DownloadSimpleIcon className="size-4" />
-					Export CSV
-				</Button>
-			</CardHeader>
-			<CardContent className="flex flex-col gap-6 pt-6">
-				<ResultsSummary summary={summary} />
 
-				<Tabs
-					value={activeView}
-					onValueChange={(v) => onViewChange(v as "table" | "tree")}
-				>
-					<TabsList className="border border-white/10 bg-zinc-800/50">
-						<TabsTab value="table" className="data-active:text-white">
-							<ListBulletsIcon className="size-4" />
-							Table View
-						</TabsTab>
-						<TabsTab value="tree" className="data-active:text-white">
-							<TreeStructureIcon className="size-4" />
-							Tree View
-						</TabsTab>
-					</TabsList>
+				<div className="flex flex-col gap-8">
+					<ResultsSummary summary={summary} />
 
-					<TabsContent value="table" className="mt-6">
-						<ResultsTableView
-							results={paginatedResults}
-							currentPage={currentPage}
-							totalPages={totalPages}
-							totalResults={results.length}
-							onPageChange={onPageChange}
-						/>
-					</TabsContent>
+					<Tabs
+						value={activeView}
+						onValueChange={(v) => onViewChange(v as "table" | "tree")}
+						className="w-full"
+					>
+						<TabsList className="w-full justify-start border-b border-white/10 bg-transparent p-0 mb-6">
+							<TabsTab
+								value="table"
+								className="rounded-none border-b-2 border-transparent bg-transparent px-6 py-3 font-mono text-sm text-zinc-500 hover:text-zinc-300 data-active:border-[var(--color-acid)] data-active:text-[var(--color-acid)] transition-all"
+							>
+								<ListBulletsIcon className="size-4 mr-2" />
+								TABLE_VIEW
+							</TabsTab>
+							<TabsTab
+								value="tree"
+								className="rounded-none border-b-2 border-transparent bg-transparent px-6 py-3 font-mono text-sm text-zinc-500 hover:text-zinc-300 data-active:border-[var(--color-purple)] data-active:text-[var(--color-purple)] transition-all"
+							>
+								<TreeStructureIcon className="size-4 mr-2" />
+								TREE_STRUCTURE
+							</TabsTab>
+						</TabsList>
 
-					<TabsContent value="tree" className="mt-6">
-						<ResultsTreeView tree={urlTree} />
-					</TabsContent>
-				</Tabs>
-			</CardContent>
-		</Card>
+						<div className="relative min-h-[400px]">
+							<TabsContent value="table" className="animate-slide-up">
+								<ResultsTableView
+									results={paginatedResults}
+									currentPage={currentPage}
+									totalPages={totalPages}
+									totalResults={results.length}
+									onPageChange={onPageChange}
+								/>
+							</TabsContent>
+
+							<TabsContent value="tree" className="animate-slide-up">
+								<ResultsTreeView tree={urlTree} />
+							</TabsContent>
+						</div>
+					</Tabs>
+				</div>
+			</div>
+		</div>
 	);
 }

@@ -1,5 +1,4 @@
 import { useState, useTransition } from "react";
-
 import {
 	CaretDoubleUpIcon,
 	CaretUpDownIcon,
@@ -59,11 +58,11 @@ export function ResultsTreeView({ tree }: ResultsTreeViewProps) {
 			<Empty className="border-white/10 bg-black/20">
 				<EmptyHeader>
 					<EmptyMedia variant="icon">
-						<TreeStructureIcon className="text-zinc-400" />
+						<TreeStructureIcon className="text-zinc-500" />
 					</EmptyMedia>
-					<EmptyTitle className="text-zinc-300">No Tree Data</EmptyTitle>
-					<EmptyDescription className="text-zinc-500">
-						Run the test to see results in tree view
+					<EmptyTitle className="text-zinc-400 font-mono tracking-wide">NO_STRUCTURE</EmptyTitle>
+					<EmptyDescription className="text-zinc-600 font-mono text-xs">
+						EXECUTE_ANALYSIS_TO_VISUALIZE
 					</EmptyDescription>
 				</EmptyHeader>
 			</Empty>
@@ -78,32 +77,32 @@ export function ResultsTreeView({ tree }: ResultsTreeViewProps) {
 					size="sm"
 					onClick={expandAll}
 					disabled={isExpandPending}
-					className="border-white/10 text-zinc-400 hover:bg-white/5 hover:text-zinc-300 disabled:opacity-70"
+					className="border-white/10 bg-zinc-900/50 text-zinc-400 hover:bg-[var(--color-acid)]/10 hover:border-[var(--color-acid)]/50 hover:text-[var(--color-acid)] disabled:opacity-50 font-mono text-xs"
 				>
 					{isExpandPending ? (
 						<SpinnerGapIcon className="size-4 animate-spin" />
 					) : (
 						<CaretUpDownIcon className="size-4" />
 					)}
-					{isExpandPending ? "Expanding..." : "Expand All"}
+					{isExpandPending ? "EXPANDING..." : "EXPAND_ALL"}
 				</Button>
 				<Button
 					variant="outline"
 					size="sm"
 					onClick={collapseAll}
 					disabled={isCollapsePending}
-					className="border-white/10 text-zinc-400 hover:bg-white/5 hover:text-zinc-300 disabled:opacity-70"
+					className="border-white/10 bg-zinc-900/50 text-zinc-400 hover:bg-[var(--color-purple)]/10 hover:border-[var(--color-purple)]/50 hover:text-[var(--color-purple)] disabled:opacity-50 font-mono text-xs"
 				>
 					{isCollapsePending ? (
 						<SpinnerGapIcon className="size-4 animate-spin" />
 					) : (
 						<CaretDoubleUpIcon className="size-4" />
 					)}
-					{isCollapsePending ? "Collapsing..." : "Collapse All"}
+					{isCollapsePending ? "COLLAPSING..." : "COLLAPSE_ALL"}
 				</Button>
 			</div>
 
-			<ScrollArea className="h-[500px] rounded-xl border border-white/10 bg-black/20 p-4">
+			<ScrollArea className="h-[350px] sm:h-[400px] md:h-[500px] rounded-lg border border-white/10 bg-black/20 p-4">
 				<div className="flex flex-col gap-0.5">
 					{tree.children.map((child) => (
 						<TreeNode

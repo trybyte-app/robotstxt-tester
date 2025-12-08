@@ -1,7 +1,5 @@
-import { RobotIcon, ShieldCheckIcon } from "@phosphor-icons/react";
-
 import { useRobotsTester } from "@/hooks/use-robots-tester";
-
+import { LightningIcon, RobotIcon, ShieldCheckIcon, TerminalWindowIcon } from "@phosphor-icons/react";
 import { InputSection } from "./InputSection";
 import { ResultsSection } from "./ResultsSection";
 
@@ -9,102 +7,114 @@ export function RobotsTester() {
 	const state = useRobotsTester();
 
 	return (
-		<div className="dark noise-bg relative min-h-screen">
-			<div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col gap-8 p-4 md:p-8 lg:p-12 xl:px-16">
-				{/* Header */}
-				<header className="animate-fade-in-up relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 p-8 md:p-10">
-					{/* Decorative elements */}
-					<div className="absolute -top-20 -right-20 size-64 rounded-full bg-emerald-500/10 blur-3xl" />
-					<div className="absolute -bottom-20 -left-20 size-48 rounded-full bg-cyan-500/10 blur-3xl" />
+		<div className="selection-acid min-h-screen bg-[var(--background)] p-4 md:p-8 lg:p-12 overflow-x-hidden">
+			<div className="mx-auto max-w-7xl relative">
 
-					<div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-						<div className="flex items-start gap-4">
-							<div className="flex size-14 items-center justify-center rounded-xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-sm">
-								<RobotIcon className="size-7 text-emerald-400" />
-							</div>
-							<div className="flex flex-col gap-1">
-								<h1 className="text-2xl font-extrabold tracking-tight text-white md:text-3xl lg:text-4xl">
-									robots.txt Tester
-								</h1>
-								<p className="text-sm text-zinc-400 md:text-base">
-									Validate URLs against robots.txt rules for any user-agent
-								</p>
-							</div>
-						</div>
+				{/* Ambient Background Elements */}
+				<div className="absolute -top-20 -right-20 w-96 h-96 bg-[var(--color-navy)] rounded-full mix-blend-screen filter blur-[128px] opacity-20 pointer-events-none animate-[pulse_8s_ease-in-out_infinite]" />
+				<div className="absolute top-40 -left-20 w-64 h-64 bg-[var(--color-acid)] rounded-full mix-blend-screen filter blur-[100px] opacity-10 pointer-events-none" />
 
-						<div className="flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-400">
-							<ShieldCheckIcon className="size-4" />
-							<span className="font-medium">RFC 9309 Compliant</span>
+				{/* Header Section */}
+				<header className="relative mb-10 md:mb-16 animate-slide-up">
+					<div className="flex items-center gap-4 mb-6">
+						<div className="h-px bg-white/20 flex-1 origin-left animate-reveal-line" />
+						<div className="flex items-center gap-2 text-xs font-mono text-zinc-500 uppercase tracking-widest">
+							<span className="w-2 h-2 rounded-full bg-[var(--color-acid)] animate-pulse" />
+							VALIDATION ENGINE READY
 						</div>
 					</div>
 
-					{/* Terminal-style prompt indicator */}
-					<div className="mt-6 flex items-center gap-2 font-mono text-xs text-zinc-500">
-						<span className="text-emerald-400">$</span>
-						<span>robots-tester</span>
-						<span className="animate-pulse text-emerald-400">_</span>
+					<div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+						<div>
+							<h1 className="text-4xl sm:text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-4">
+								ROBOTS<span className="text-[var(--color-acid)]">.</span>TXT
+								<br />
+								<span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-zinc-800">
+									TESTER
+								</span>
+							</h1>
+							<p className="font-mono text-zinc-400 max-w-lg text-sm sm:text-base md:text-lg border-l-2 border-[var(--color-acid)] pl-4 mt-6 md:mt-8">
+								RFC 9309 compliant validation engine. Optimize your crawl budget.
+							</p>
+						</div>
+
+						<div className="flex flex-col gap-3 md:gap-4 items-start md:items-end">
+							<div className="flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+								<ShieldCheckIcon className="size-5 text-[var(--color-acid)]" />
+								<span className="font-mono text-sm text-zinc-300">Standard Compliant</span>
+							</div>
+							<div className="flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+								<LightningIcon className="size-5 text-[var(--color-purple)]" />
+								<span className="font-mono text-sm text-zinc-300">Real-time Analysis</span>
+							</div>
+						</div>
 					</div>
 				</header>
 
-				{/* Input Section */}
-				<div className="animate-fade-in-up animation-delay-100">
-					<InputSection
-						robotsTxt={state.robotsTxt}
-						urlList={state.urlList}
-						selectedUserAgent={state.selectedUserAgent}
-						customUserAgent={state.customUserAgent}
-						isLoading={state.isLoading}
-						inputError={state.inputError}
-						onRobotsTxtChange={state.setRobotsTxt}
-						onUrlListChange={state.setUrlList}
-						onUserAgentChange={state.setSelectedUserAgent}
-						onCustomUserAgentChange={state.setCustomUserAgent}
-						onTest={state.testUrls}
-						onClear={state.clearData}
-					/>
-				</div>
+				{/* Main Interface */}
+				<main className="grid gap-12 relative z-10">
+					{/* Input Console */}
+					<div className="animate-slide-up delay-100">
+						<div className="mb-4 flex items-center gap-2 font-mono text-sm text-zinc-500">
+							<TerminalWindowIcon className="size-4" />
+							<span>INPUT_CONSOLE</span>
+						</div>
 
-				{/* Results Section */}
-				{state.results.length > 0 && (
-					<div>
-						<ResultsSection
-							results={state.results}
-							paginatedResults={state.paginatedResults}
-							summary={state.summary}
-							urlTree={state.urlTree}
-							currentPage={state.currentPage}
-							totalPages={state.totalPages}
-							activeView={state.activeView}
-							onPageChange={state.setCurrentPage}
-							onViewChange={state.setActiveView}
+						<InputSection
+							robotsTxt={state.robotsTxt}
+							urlList={state.urlList}
+							selectedUserAgent={state.selectedUserAgent}
+							customUserAgent={state.customUserAgent}
+							isLoading={state.isLoading}
+							inputError={state.inputError}
+							onRobotsTxtChange={state.setRobotsTxt}
+							onUrlListChange={state.setUrlList}
+							onUserAgentChange={state.setSelectedUserAgent}
+							onCustomUserAgentChange={state.setCustomUserAgent}
+							onTest={state.testUrls}
+							onClear={state.clearData}
 						/>
 					</div>
-				)}
+
+					{/* Results Terminal */}
+					{state.results.length > 0 && (
+						<div className="animate-slide-up delay-200">
+							<div className="mb-4 flex items-center gap-2 font-mono text-sm text-zinc-500">
+								<RobotIcon className="size-4" />
+								<span>ANALYSIS_RESULTS</span>
+							</div>
+							<ResultsSection
+								results={state.results}
+								paginatedResults={state.paginatedResults}
+								summary={state.summary}
+								urlTree={state.urlTree}
+								currentPage={state.currentPage}
+								totalPages={state.totalPages}
+								activeView={state.activeView}
+								onPageChange={state.setCurrentPage}
+								onViewChange={state.setActiveView}
+							/>
+						</div>
+					)}
+				</main>
 
 				{/* Footer */}
-				<footer className="mt-auto border-t border-white/5 pt-8 pb-4">
-					<div className="flex flex-col items-center gap-3">
-						<div className="flex items-center gap-2">
-							<span className="text-sm font-semibold text-zinc-400">
-								Brought to you by
-							</span>
-							<img src="byte-light.png" alt="Byte" className="h-6" />
-						</div>
-						<div className="mt-2 flex items-center gap-4 text-xs text-zinc-400">
-							<span>
-								Powered by{" "}
-								<a
-									href="https://github.com/trybyte-app/robotstxt-ts-port"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="text-zinc-400 underline transition-colors hover:text-zinc-300"
-								>
-									robotstxt-parser
-								</a>
-							</span>
-							<span className="size-1 rounded-full bg-zinc-700" />
-							<span>RFC 9309 Compliant</span>
-						</div>
+				<footer className="mt-24 border-t border-zinc-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 animate-slide-up delay-300">
+					<div className="flex items-center gap-4">
+						<img src="/byte-light.png" alt="Byte" className="h-8 opacity-80 hover:opacity-100 transition-opacity" />
+						<span className="text-zinc-600 font-mono text-sm">/</span>
+						<span className="text-zinc-500 font-mono text-sm">ENGINEERED BY BYTE</span>
+					</div>
+
+					<div className="flex gap-8 font-mono text-xs text-zinc-600">
+						<a
+							href="https://www.npmjs.com/package/@trybyte/robotstxt-parser"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="hover:text-[var(--color-acid)] transition-colors"
+						>
+							@trybyte/robotstxt-parser
+						</a>
 					</div>
 				</footer>
 			</div>
