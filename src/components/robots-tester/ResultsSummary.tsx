@@ -31,18 +31,18 @@ export function ResultsSummary({ summary }: ResultsSummaryProps) {
 			</div>
 
 			{/* Allowed */}
-			<div className="group flex flex-col gap-2 rounded-lg border border-(--color-acid)/30 bg-(--color-acid)/5 p-4 transition-all hover:bg-(--color-acid)/10 hover:shadow-[0_0_20px_-5px_var(--color-acid-glow)]">
-				<div className="flex items-center gap-2 text-(--color-acid)">
+			<div className="group flex flex-col gap-2 rounded-lg border border-[var(--color-acid)]/30 bg-[var(--color-acid)]/5 p-4 transition-all hover:bg-[var(--color-acid)]/10 hover:shadow-[0_0_20px_-5px_var(--color-acid-glow)]">
+				<div className="flex items-center gap-2 text-[var(--color-acid)]">
 					<CheckCircleIcon className="size-4" />
 					<span className="font-mono text-xs font-bold tracking-wider uppercase">
 						Allowed
 					</span>
 				</div>
 				<div className="flex items-baseline gap-2">
-					<p className="font-mono text-3xl font-bold text-(--color-acid)">
+					<p className="font-mono text-3xl font-bold text-[var(--color-acid)]">
 						{summary.allowed}
 					</p>
-					<span className="text-sm font-mono text-(--color-acid)/60">{allowedPercent}%</span>
+					<span className="text-sm font-mono text-[var(--color-acid)]/60">{allowedPercent}%</span>
 				</div>
 			</div>
 
@@ -68,14 +68,14 @@ export function ResultsSummary({ summary }: ResultsSummaryProps) {
 			</div>
 
 			{/* Invalid */}
-			<div className="group flex flex-col gap-2 rounded-lg border border-(--color-purple)/30 bg-(--color-purple)/5 p-4 transition-all hover:bg-(--color-purple)/10 hover:shadow-[0_0_20px_-5px_var(--color-purple-glow)]">
-				<div className="flex items-center gap-2 text-(--color-purple)">
+			<div className="group flex flex-col gap-2 rounded-lg border border-[var(--color-purple)]/30 bg-[var(--color-purple)]/5 p-4 transition-all hover:bg-[var(--color-purple)]/10 hover:shadow-[0_0_20px_-5px_var(--color-purple-glow)]">
+				<div className="flex items-center gap-2 text-[var(--color-purple)]">
 					<WarningIcon className="size-4" />
 					<span className="font-mono text-xs font-bold tracking-wider uppercase">
 						Invalid
 					</span>
 				</div>
-				<p className="font-mono text-3xl font-bold text-(--color-purple)">
+				<p className="font-mono text-3xl font-bold text-[var(--color-purple)]">
 					{summary.invalid}
 				</p>
 			</div>

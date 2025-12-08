@@ -86,7 +86,7 @@ export function InputSection({
 								)}
 							</FieldLabel>
 							<div className="relative w-full">
-								<div className="absolute inset-0 bg-linear-to-br from-acid/5 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity pointer-events-none rounded-lg" />
+								<div className="absolute inset-0 bg-gradient-to-br from-acid/5 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity pointer-events-none rounded-lg" />
 								<Textarea
 									value={robotsTxt}
 									onChange={(e) => onRobotsTxtChange(e.target.value)}
@@ -98,7 +98,7 @@ export function InputSection({
 
 						{/* URLs Input */}
 						<Field className="fixed-textarea group">
-							<FieldLabel className="flex items-center justify-between text-zinc-400 mb-3 group-focus-within:text-(--color-purple) transition-colors w-full">
+							<FieldLabel className="flex items-center justify-between text-zinc-400 mb-3 group-focus-within:text-[var(--color-purple)] transition-colors w-full">
 								<span className="flex items-center gap-2 font-mono text-sm uppercase tracking-wider">
 									<LinkSimpleIcon className="size-4" />
 									Target URLs
@@ -110,19 +110,19 @@ export function InputSection({
 								)}
 							</FieldLabel>
 							<div className="relative w-full">
-								<div className="absolute inset-0 bg-linear-to-br from-purple/5 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity pointer-events-none rounded-lg" />
+								<div className="absolute inset-0 bg-gradient-to-br from-purple/5 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity pointer-events-none rounded-lg" />
 								<Textarea
 									value={urlList}
 									onChange={(e) => onUrlListChange(e.target.value)}
 									placeholder={`https://example.com/\nhttps://example.com/admin/dashboard\nhttps://example.com/public/file.pdf\nhttps://example.com/api/v1/users`}
-									className="h-56 md:h-80 bg-zinc-950/50 border-white/10 font-mono text-sm leading-relaxed text-zinc-300 focus:border-(--color-purple) focus:ring-purple/20 transition-all rounded-lg selection:bg-(--color-purple) selection:text-white"
+									className="h-56 md:h-80 bg-zinc-950/50 border-white/10 font-mono text-sm leading-relaxed text-zinc-300 focus:border-[var(--color-purple)] focus:ring-purple/20 transition-all rounded-lg selection:bg-[var(--color-purple)] selection:text-white"
 								/>
 							</div>
 						</Field>
 					</div>
 
 					{/* User Agent Selector */}
-					<div className="p-1 rounded-xl bg-linear-to-r from-zinc-800/50 to-zinc-900/50">
+					<div className="p-1 rounded-xl bg-gradient-to-r from-zinc-800/50 to-zinc-900/50">
 						<div className="bg-zinc-950/80 rounded-lg p-6 border border-white/5">
 							<UserAgentSelector
 								selectedUserAgent={selectedUserAgent}

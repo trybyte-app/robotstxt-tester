@@ -51,7 +51,7 @@ export function ResultsSection({
 				<div className="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-white/5 pb-6 mb-8 gap-4">
 					<div className="flex items-center gap-4">
 						<div className="size-12 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center shadow-inner">
-							<ChartBarIcon className="size-6 text-(--color-purple)" />
+							<ChartBarIcon className="size-6 text-[var(--color-purple)]" />
 						</div>
 						<div>
 							<h3 className="text-xl font-bold text-white tracking-tight">Analysis Report</h3>
@@ -64,7 +64,7 @@ export function ResultsSection({
 						variant="outline"
 						size="sm"
 						onClick={handleExport}
-						className="border-zinc-800 bg-zinc-900/50 text-zinc-300 hover:border-(--color-acid) hover:text-(--color-acid) hover:bg-(--color-acid)/10 transition-all font-mono text-xs"
+						className="border-zinc-800 bg-zinc-900/50 text-zinc-300 hover:border-[var(--color-acid)] hover:text-[var(--color-acid)] hover:bg-[var(--color-acid)]/10 transition-all font-mono text-xs"
 					>
 						<DownloadSimpleIcon className="size-4" />
 						EXPORT_DATA
@@ -82,14 +82,14 @@ export function ResultsSection({
 						<TabsList className="w-full justify-start border-b border-white/10 bg-transparent p-0 mb-6">
 							<TabsTab
 								value="table"
-								className="rounded-none border-b-2 border-transparent bg-transparent px-6 py-3 font-mono text-sm text-zinc-500 hover:text-zinc-300 data-active:border-(--color-acid) data-active:text-(--color-acid) transition-all"
+								className="rounded-none border-b-2 border-transparent bg-transparent px-6 py-3 font-mono text-sm text-zinc-500 hover:text-zinc-300 data-active:border-[var(--color-acid)] data-active:text-[var(--color-acid)] transition-all"
 							>
 								<ListBulletsIcon className="size-4 mr-2" />
 								TABLE_VIEW
 							</TabsTab>
 							<TabsTab
 								value="tree"
-								className="rounded-none border-b-2 border-transparent bg-transparent px-6 py-3 font-mono text-sm text-zinc-500 hover:text-zinc-300 data-active:border-(--color-purple) data-active:text-(--color-purple) transition-all"
+								className="rounded-none border-b-2 border-transparent bg-transparent px-6 py-3 font-mono text-sm text-zinc-500 hover:text-zinc-300 data-active:border-[var(--color-purple)] data-active:text-[var(--color-purple)] transition-all"
 							>
 								<TreeStructureIcon className="size-4 mr-2" />
 								TREE_STRUCTURE

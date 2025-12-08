@@ -77,7 +77,7 @@ export function ResultsTreeView({ tree }: ResultsTreeViewProps) {
 					size="sm"
 					onClick={expandAll}
 					disabled={isExpandPending}
-					className="border-white/10 bg-zinc-900/50 text-zinc-400 hover:bg-(--color-acid)/10 hover:border-(--color-acid)/50 hover:text-(--color-acid) disabled:opacity-50 font-mono text-xs"
+					className="border-white/10 bg-zinc-900/50 text-zinc-400 hover:bg-[var(--color-acid)]/10 hover:border-[var(--color-acid)]/50 hover:text-[var(--color-acid)] disabled:opacity-50 font-mono text-xs"
 				>
 					{isExpandPending ? (
 						<SpinnerGapIcon className="size-4 animate-spin" />
@@ -91,7 +91,7 @@ export function ResultsTreeView({ tree }: ResultsTreeViewProps) {
 					size="sm"
 					onClick={collapseAll}
 					disabled={isCollapsePending}
-					className="border-white/10 bg-zinc-900/50 text-zinc-400 hover:bg-(--color-purple)/10 hover:border-(--color-purple)/50 hover:text-(--color-purple) disabled:opacity-50 font-mono text-xs"
+					className="border-white/10 bg-zinc-900/50 text-zinc-400 hover:bg-[var(--color-purple)]/10 hover:border-[var(--color-purple)]/50 hover:text-[var(--color-purple)] disabled:opacity-50 font-mono text-xs"
 				>
 					{isCollapsePending ? (
 						<SpinnerGapIcon className="size-4 animate-spin" />

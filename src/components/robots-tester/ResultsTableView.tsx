@@ -96,7 +96,7 @@ export function ResultsTableView({
 									</TableCell>
 									<TableCell className="max-w-[180px] sm:max-w-xs md:max-w-md">
 										<Tooltip>
-											<TooltipTrigger className="block max-w-full cursor-default truncate font-mono text-sm text-zinc-300 hover:text-(--color-acid) transition-colors">
+											<TooltipTrigger className="block max-w-full cursor-default truncate font-mono text-sm text-zinc-300 hover:text-[var(--color-acid)] transition-colors">
 												{result.url}
 											</TooltipTrigger>
 											<TooltipContent
@@ -110,12 +110,12 @@ export function ResultsTableView({
 									</TableCell>
 									<TableCell>
 										{!result.isValidUrl ? (
-											<span className="inline-flex items-center gap-1.5 rounded-full border border-(--color-purple)/30 bg-(--color-purple)/10 px-2.5 py-1 text-xs font-mono font-bold text-(--color-purple)">
+											<span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-purple)]/30 bg-[var(--color-purple)]/10 px-2.5 py-1 text-xs font-mono font-bold text-[var(--color-purple)]">
 												<WarningIcon className="size-3" />
 												INVALID
 											</span>
 										) : result.allowed ? (
-											<span className="inline-flex items-center gap-1.5 rounded-full border border-(--color-acid)/30 bg-(--color-acid)/10 px-2.5 py-1 text-xs font-mono font-bold text-(--color-acid)">
+											<span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-acid)]/30 bg-[var(--color-acid)]/10 px-2.5 py-1 text-xs font-mono font-bold text-[var(--color-acid)]">
 												<CheckCircleIcon className="size-3" />
 												ALLOWED
 											</span>
@@ -128,7 +128,7 @@ export function ResultsTableView({
 									</TableCell>
 									<TableCell className="font-mono text-sm text-zinc-400">
 										{result.matchedPattern ? (
-											<span className="text-(--color-acid)">{result.matchedPattern}</span>
+											<span className="text-[var(--color-acid)]">{result.matchedPattern}</span>
 										) : (
 											<span className="text-zinc-700">-</span>
 										)}
@@ -178,7 +178,7 @@ export function ResultsTableView({
 												<PaginationLink
 													onClick={() => onPageChange(pageNum)}
 													isActive={currentPage === pageNum}
-													className={`cursor-pointer font-mono ${currentPage === pageNum ? "border-(--color-acid)/30 bg-(--color-acid)/10 text-(--color-acid)" : "hover:bg-white/5 hover:text-white"}`}
+													className={`cursor-pointer font-mono ${currentPage === pageNum ? "border-[var(--color-acid)]/30 bg-[var(--color-acid)]/10 text-[var(--color-acid)]" : "hover:bg-white/5 hover:text-white"}`}
 												>
 													{pageNum}
 												</PaginationLink>

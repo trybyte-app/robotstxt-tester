@@ -40,7 +40,7 @@ export function TreeNode({
 				style={{ paddingLeft: `${depth * 20 + 8}px` }}
 			>
 				{hasChildren ? (
-					<CollapsibleTrigger className="flex items-center rounded p-0.5 text-zinc-600 hover:text-(--color-acid) hover:bg-(--color-acid)/10 transition-colors">
+					<CollapsibleTrigger className="flex items-center rounded p-0.5 text-zinc-600 hover:text-[var(--color-acid)] hover:bg-[var(--color-acid)]/10 transition-colors">
 						{isExpanded ? (
 							<CaretDownIcon className="size-4" />
 						) : (
@@ -52,9 +52,9 @@ export function TreeNode({
 				)}
 
 				{isRoot ? (
-					<GlobeSimpleIcon className="size-4 text-(--color-acid)" />
+					<GlobeSimpleIcon className="size-4 text-[var(--color-acid)]" />
 				) : isDirectory ? (
-					<FolderSimpleIcon className="size-4 text-(--color-purple)" />
+					<FolderSimpleIcon className="size-4 text-[var(--color-purple)]" />
 				) : (
 					<FileIcon className="size-4 text-zinc-600" />
 				)}
@@ -67,7 +67,7 @@ export function TreeNode({
 
 				<div className="flex items-center gap-1.5 opacity-60 group-hover:opacity-100 transition-opacity">
 					{node.stats.allowed > 0 && (
-						<span className="inline-flex items-center gap-1 rounded border border-(--color-acid)/30 bg-(--color-acid)/5 px-1.5 py-0.5 text-[10px] font-bold text-(--color-acid)">
+						<span className="inline-flex items-center gap-1 rounded border border-[var(--color-acid)]/30 bg-[var(--color-acid)]/5 px-1.5 py-0.5 text-[10px] font-bold text-[var(--color-acid)]">
 							<CheckCircleIcon className="size-3" weight="fill" />
 							{node.stats.allowed}
 						</span>
@@ -101,7 +101,7 @@ export function TreeNode({
 						>
 							<span className="w-5" />
 							{url.allowed ? (
-								<CheckCircleIcon className="size-4 text-(--color-acid)" />
+								<CheckCircleIcon className="size-4 text-[var(--color-acid)]" />
 							) : (
 								<XCircleIcon className="size-4 text-red-500" />
 							)}
