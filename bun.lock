@@ -8,7 +8,7 @@
         "@base-ui-components/react": "^1.0.0-beta.7",
         "@phosphor-icons/react": "^2.1.10",
         "@tailwindcss/vite": "^4.1.17",
-        "@trybyte/robotstxt-parser": "^1.1.0",
+        "@trybyte/robotstxt-parser": "^1.2.0",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "react": "^19.2.0",
@@ -205,7 +205,7 @@
 
     "@trivago/prettier-plugin-sort-imports": ["@trivago/prettier-plugin-sort-imports@6.0.0", "", { "dependencies": { "@babel/generator": "^7.28.0", "@babel/parser": "^7.28.0", "@babel/traverse": "^7.28.0", "@babel/types": "^7.28.0", "javascript-natural-sort": "^0.7.1", "lodash-es": "^4.17.21", "minimatch": "^9.0.0", "parse-imports-exports": "^0.2.4" }, "peerDependencies": { "@vue/compiler-sfc": "3.x", "prettier": "2.x - 3.x", "prettier-plugin-ember-template-tag": ">= 2.0.0", "prettier-plugin-svelte": "3.x", "svelte": "4.x || 5.x" }, "optionalPeers": ["@vue/compiler-sfc", "prettier-plugin-ember-template-tag", "prettier-plugin-svelte", "svelte"] }, "sha512-Xarx55ow0R8oC7ViL5fPmDsg1EBa1dVhyZFVbFXNtPPJyW2w9bJADIla8YFSaNG9N06XfcklA9O9vmw4noNxkQ=="],
 
-    "@trybyte/robotstxt-parser": ["@trybyte/robotstxt-parser@1.1.0", "", {}, "sha512-bWqvYsj4tGNtxXtorQjpO9wsXxKLp7SZ1aYO2ed0Ws9LBBHjj2bGiu5rz0WlPYU34dYXYBro6FvOAa9vKnUv/w=="],
+    "@trybyte/robotstxt-parser": ["@trybyte/robotstxt-parser@1.2.0", "", {}, "sha512-AywmLqMu0ljMLEPVb4oPxwnyFmm3xxOS6LmwRia5jgqvzrBAoXXR0JWXEXaq/IG3tlFSXuAp+XzAabrijYzyUQ=="],
 
     "@tybys/wasm-util": ["@tybys/wasm-util@0.10.1", "", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-9tTaPJLSiejZKx+Bmog4uSubteqTvFrVrURwkmHixBo0G4seD0zUxp98E1DzUBJxLQ3NPwXrGKDiVjwx/DpPsg=="],
 
