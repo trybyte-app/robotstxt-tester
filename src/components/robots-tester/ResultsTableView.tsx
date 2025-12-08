@@ -59,9 +59,9 @@ export function ResultsTableView({
 					<EmptyMedia variant="icon">
 						<WarningIcon className="text-zinc-400" />
 					</EmptyMedia>
-					<EmptyTitle className="text-zinc-300">No Results</EmptyTitle>
-					<EmptyDescription className="text-zinc-500">
-						Enter URLs and run the test to see results
+					<EmptyTitle className="text-zinc-300">NO_DATA</EmptyTitle>
+					<EmptyDescription className="text-zinc-500 font-mono text-xs">
+						AWAITING_INPUT_STREAM
 					</EmptyDescription>
 				</EmptyHeader>
 			</Empty>
@@ -74,15 +74,15 @@ export function ResultsTableView({
 	return (
 		<TooltipProvider>
 			<div className="flex flex-col gap-4">
-				<div className="overflow-x-auto rounded-xl border border-white/10 bg-black/20">
+				<div className="overflow-x-auto rounded-lg border border-white/10 bg-black/20">
 					<Table>
 						<TableHeader>
 							<TableRow className="border-white/10 hover:bg-transparent">
-								<TableHead className="w-16 text-zinc-500">#</TableHead>
-								<TableHead className="text-zinc-500">URL</TableHead>
-								<TableHead className="w-32 text-zinc-500">Status</TableHead>
-								<TableHead className="text-zinc-500">Matching Rule</TableHead>
-								<TableHead className="w-20 text-zinc-500">Line</TableHead>
+								<TableHead className="w-16 text-zinc-500 font-mono text-xs uppercase tracking-wider">#</TableHead>
+								<TableHead className="text-zinc-500 font-mono text-xs uppercase tracking-wider">Target_URL</TableHead>
+								<TableHead className="w-32 text-zinc-500 font-mono text-xs uppercase tracking-wider">Status</TableHead>
+								<TableHead className="text-zinc-500 font-mono text-xs uppercase tracking-wider">Matching_Rule</TableHead>
+								<TableHead className="hidden sm:table-cell w-20 text-zinc-500 font-mono text-xs uppercase tracking-wider">Line</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
@@ -94,15 +94,15 @@ export function ResultsTableView({
 									<TableCell className="font-mono text-zinc-600">
 										{startIndex + index}
 									</TableCell>
-									<TableCell className="max-w-md">
+									<TableCell className="max-w-[180px] sm:max-w-xs md:max-w-md">
 										<Tooltip>
-											<TooltipTrigger className="block max-w-full cursor-default truncate font-mono text-sm text-zinc-300">
+											<TooltipTrigger className="block max-w-full cursor-default truncate font-mono text-sm text-zinc-300 hover:text-(--color-acid) transition-colors">
 												{result.url}
 											</TooltipTrigger>
 											<TooltipContent
 												side="bottom"
 												align="start"
-												className="max-w-lg font-mono text-xs"
+												className="max-w-lg font-mono text-xs bg-zinc-900 border-zinc-800 text-zinc-300"
 											>
 												{result.url}
 											</TooltipContent>
@@ -110,30 +110,32 @@ export function ResultsTableView({
 									</TableCell>
 									<TableCell>
 										{!result.isValidUrl ? (
-											<span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-1 text-xs font-medium text-amber-400">
+											<span className="inline-flex items-center gap-1.5 rounded-full border border-(--color-purple)/30 bg-(--color-purple)/10 px-2.5 py-1 text-xs font-mono font-bold text-(--color-purple)">
 												<WarningIcon className="size-3" />
-												Invalid
+												INVALID
 											</span>
 										) : result.allowed ? (
-											<span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-400">
+											<span className="inline-flex items-center gap-1.5 rounded-full border border-(--color-acid)/30 bg-(--color-acid)/10 px-2.5 py-1 text-xs font-mono font-bold text-(--color-acid)">
 												<CheckCircleIcon className="size-3" />
-												Allowed
+												ALLOWED
 											</span>
 										) : (
-											<span className="inline-flex items-center gap-1.5 rounded-full border border-red-500/20 bg-red-500/10 px-2.5 py-1 text-xs font-medium text-red-400">
+											<span className="inline-flex items-center gap-1.5 rounded-full border border-red-500/30 bg-red-500/10 px-2.5 py-1 text-xs font-mono font-bold text-red-500">
 												<XCircleIcon className="size-3" />
-												Disallowed
+												BLOCKED
 											</span>
 										)}
 									</TableCell>
-									<TableCell className="font-mono text-sm text-cyan-300">
-										{result.matchedPattern ?? (
-											<span className="text-zinc-600">-</span>
+									<TableCell className="font-mono text-sm text-zinc-400">
+										{result.matchedPattern ? (
+											<span className="text-(--color-acid)">{result.matchedPattern}</span>
+										) : (
+											<span className="text-zinc-700">-</span>
 										)}
 									</TableCell>
-									<TableCell className="text-center font-mono text-zinc-400">
+									<TableCell className="hidden sm:table-cell text-center font-mono text-zinc-500">
 										{result.matchingLine ?? (
-											<span className="text-zinc-600">-</span>
+											<span className="text-zinc-700">-</span>
 										)}
 									</TableCell>
 								</TableRow>
@@ -143,14 +145,13 @@ export function ResultsTableView({
 				</div>
 
 				{totalPages > 1 && (
-					<div className="flex items-center justify-between">
-						<p className="text-sm text-zinc-500">
-							Showing{" "}
-							<span className="font-mono text-zinc-300">
+					<div className="flex items-center justify-between border-t border-white/5 pt-4">
+						<p className="text-sm text-zinc-500 font-mono">
+							DISPLAYING{" "}
+							<span className="text-zinc-300">
 								{startIndex}-{endIndex}
 							</span>{" "}
-							of <span className="font-mono text-zinc-300">{totalResults}</span>{" "}
-							results
+							OF <span className="text-zinc-300">{totalResults}</span>
 						</p>
 						<Pagination>
 							<PaginationContent>
@@ -161,7 +162,7 @@ export function ResultsTableView({
 										className={
 											currentPage === 1
 												? "pointer-events-none opacity-50"
-												: "cursor-pointer hover:bg-white/5"
+												: "cursor-pointer hover:bg-white/5 hover:text-white"
 										}
 									/>
 								</PaginationItem>
@@ -177,7 +178,7 @@ export function ResultsTableView({
 												<PaginationLink
 													onClick={() => onPageChange(pageNum)}
 													isActive={currentPage === pageNum}
-													className={`cursor-pointer ${currentPage === pageNum ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400" : "hover:bg-white/5"}`}
+													className={`cursor-pointer font-mono ${currentPage === pageNum ? "border-(--color-acid)/30 bg-(--color-acid)/10 text-(--color-acid)" : "hover:bg-white/5 hover:text-white"}`}
 												>
 													{pageNum}
 												</PaginationLink>
@@ -194,7 +195,7 @@ export function ResultsTableView({
 										className={
 											currentPage === totalPages
 												? "pointer-events-none opacity-50"
-												: "cursor-pointer hover:bg-white/5"
+												: "cursor-pointer hover:bg-white/5 hover:text-white"
 										}
 									/>
 								</PaginationItem>

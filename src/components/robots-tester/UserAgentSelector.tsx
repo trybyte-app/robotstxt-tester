@@ -34,11 +34,13 @@ export function UserAgentSelector({
 	};
 
 	return (
-		<div className="flex flex-col gap-4 sm:flex-row sm:items-end">
-			<Field className="sm:w-64">
-				<FieldLabel>User-Agent</FieldLabel>
+		<div className="grid gap-4 sm:grid-cols-[256px_1fr] sm:items-start">
+			<Field>
+				<FieldLabel className="text-zinc-400 font-mono text-xs uppercase tracking-wider mb-2">
+					User-Agent
+				</FieldLabel>
 				<Select value={selectedUserAgent} onValueChange={handleValueChange}>
-					<SelectTrigger>
+					<SelectTrigger className="h-10 bg-zinc-950/50 border-white/10">
 						<SelectValue />
 					</SelectTrigger>
 					<SelectContent>
@@ -53,14 +55,17 @@ export function UserAgentSelector({
 			</Field>
 
 			{isCustom && (
-				<Field className="flex-1">
-					<FieldLabel>Custom User-Agent</FieldLabel>
+				<Field>
+					<FieldLabel className="text-zinc-400 font-mono text-xs uppercase tracking-wider mb-2">
+						Custom User-Agent
+					</FieldLabel>
 					<Input
 						value={customUserAgent}
 						onChange={(e) => onCustomUserAgentChange(e.target.value)}
 						placeholder="Enter custom user-agent string"
+						className="h-10 bg-zinc-950/50 border-white/10"
 					/>
-					<FieldDescription>
+					<FieldDescription className="text-zinc-600 text-xs mt-1.5">
 						Enter the exact user-agent string to test
 					</FieldDescription>
 				</Field>

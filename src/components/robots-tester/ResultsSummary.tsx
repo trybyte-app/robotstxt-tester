@@ -18,47 +18,47 @@ export function ResultsSummary({ summary }: ResultsSummaryProps) {
 	return (
 		<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
 			{/* Total */}
-			<div className="flex flex-col gap-2 rounded-xl border border-white/10 bg-white/[0.02] p-4">
-				<div className="flex items-center gap-2 text-zinc-400">
+			<div className="group flex flex-col gap-2 rounded-lg border border-white/10 bg-white/5 p-4 transition-all hover:bg-white/10 hover:border-white/20">
+				<div className="flex items-center gap-2 text-zinc-400 group-hover:text-white transition-colors">
 					<HashIcon className="size-4" />
-					<span className="text-xs font-medium tracking-wider uppercase">
-						Total
+					<span className="font-mono text-xs font-bold tracking-wider uppercase">
+						Total_Urls
 					</span>
 				</div>
-				<p className="font-mono text-2xl font-bold text-white">
+				<p className="font-mono text-3xl font-bold text-white">
 					{summary.total}
 				</p>
 			</div>
 
 			{/* Allowed */}
-			<div className="glow-success flex flex-col gap-2 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4">
-				<div className="flex items-center gap-2 text-emerald-400">
+			<div className="group flex flex-col gap-2 rounded-lg border border-(--color-acid)/30 bg-(--color-acid)/5 p-4 transition-all hover:bg-(--color-acid)/10 hover:shadow-[0_0_20px_-5px_var(--color-acid-glow)]">
+				<div className="flex items-center gap-2 text-(--color-acid)">
 					<CheckCircleIcon className="size-4" />
-					<span className="text-xs font-medium tracking-wider uppercase">
+					<span className="font-mono text-xs font-bold tracking-wider uppercase">
 						Allowed
 					</span>
 				</div>
 				<div className="flex items-baseline gap-2">
-					<p className="font-mono text-2xl font-bold text-emerald-400">
+					<p className="font-mono text-3xl font-bold text-(--color-acid)">
 						{summary.allowed}
 					</p>
-					<span className="text-sm text-emerald-400/60">{allowedPercent}%</span>
+					<span className="text-sm font-mono text-(--color-acid)/60">{allowedPercent}%</span>
 				</div>
 			</div>
 
 			{/* Disallowed */}
-			<div className="glow-error flex flex-col gap-2 rounded-xl border border-red-500/20 bg-red-500/5 p-4">
-				<div className="flex items-center gap-2 text-red-400">
+			<div className="group flex flex-col gap-2 rounded-lg border border-red-500/30 bg-red-500/5 p-4 transition-all hover:bg-red-500/10 hover:shadow-[0_0_20px_-5px_rgba(239,68,68,0.3)]">
+				<div className="flex items-center gap-2 text-red-500">
 					<XCircleIcon className="size-4" />
-					<span className="text-xs font-medium tracking-wider uppercase">
+					<span className="font-mono text-xs font-bold tracking-wider uppercase">
 						Disallowed
 					</span>
 				</div>
 				<div className="flex items-baseline gap-2">
-					<p className="font-mono text-2xl font-bold text-red-400">
+					<p className="font-mono text-3xl font-bold text-red-500">
 						{summary.disallowed}
 					</p>
-					<span className="text-sm text-red-400/60">
+					<span className="text-sm font-mono text-red-500/60">
 						{summary.total > 0
 							? Math.round((summary.disallowed / summary.total) * 100)
 							: 0}
@@ -68,14 +68,14 @@ export function ResultsSummary({ summary }: ResultsSummaryProps) {
 			</div>
 
 			{/* Invalid */}
-			<div className="flex flex-col gap-2 rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
-				<div className="flex items-center gap-2 text-amber-400">
+			<div className="group flex flex-col gap-2 rounded-lg border border-(--color-purple)/30 bg-(--color-purple)/5 p-4 transition-all hover:bg-(--color-purple)/10 hover:shadow-[0_0_20px_-5px_var(--color-purple-glow)]">
+				<div className="flex items-center gap-2 text-(--color-purple)">
 					<WarningIcon className="size-4" />
-					<span className="text-xs font-medium tracking-wider uppercase">
+					<span className="font-mono text-xs font-bold tracking-wider uppercase">
 						Invalid
 					</span>
 				</div>
-				<p className="font-mono text-2xl font-bold text-amber-400">
+				<p className="font-mono text-3xl font-bold text-(--color-purple)">
 					{summary.invalid}
 				</p>
 			</div>
